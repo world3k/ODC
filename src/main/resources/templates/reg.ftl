@@ -5,6 +5,10 @@
   <title>Online Distribution Center</title>
   <link rel="stylesheet" href="/css/login.css">
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+   <script src="/easyui/jquery.min.js" charset="utf-8"></script>
+  <script src="/easyui/jquery.easyui.min.js" charset="utf-8"></script>
+  <script src="/easyui/jquery.edatagrid.js" charset="utf-8"></script>
+
 </head>
 <body>
 <div class="logo_box">
@@ -27,6 +31,13 @@
       <i class="fa fa-key u_user"></i>
       <input maxlength="4" required="required" placeholder="please input verification code" name="code" class="text" type="text">
     </div>
+
+    <div class="field">
+    <select id="cc" class="easyui-combobox" style="width:100%" name="regions" data-options="label:'region：',valueField:'id',panelMaxHeight:200,panelHeight:'auto',textField:'name',url:'/regions',editable:false,multiple:true">  </select>
+    </div>
+    
+    
+    
     <div class="mb2">
       <button class="act-but submit" style="color: #FFFFFF">Submit</button>
     </div>
@@ -36,5 +47,7 @@
 
   </form>
 </div>
+
+
 </body>
 </html>

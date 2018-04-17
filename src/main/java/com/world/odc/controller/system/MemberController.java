@@ -1,15 +1,9 @@
 package com.world.odc.controller.system;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.world.odc.common.AjaxResult;
-import com.world.odc.common.DataGrid;
-import com.world.odc.common.MySpecification;
-import com.world.odc.common.MySpecification.Cnd;
-import com.world.odc.model.dao.MemberDao;
-import com.world.odc.model.dao.RoleDao;
-import com.world.odc.model.domain.Member;
-import com.world.odc.model.domain.Role;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
@@ -24,9 +18,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.world.odc.common.AjaxResult;
+import com.world.odc.common.DataGrid;
+import com.world.odc.common.MySpecification;
+import com.world.odc.common.MySpecification.Cnd;
+import com.world.odc.model.dao.MemberDao;
+import com.world.odc.model.dao.RegionDao;
+import com.world.odc.model.dao.RoleDao;
+import com.world.odc.model.domain.Member;
+import com.world.odc.model.domain.Region;
+import com.world.odc.model.domain.Role;
 
 /**
  * member management controller
@@ -45,6 +48,8 @@ public class MemberController {
 
     @Autowired
     RoleDao roleDao;
+    
+   
 
     /**
      * Super administrator id
@@ -96,6 +101,8 @@ public class MemberController {
     public List<Role> roles() {
         return roleDao.findByStatus(true);
     }
+    
+   
 
     @RequestMapping({"/save", "/update"})
     @Transactional

@@ -61,6 +61,16 @@ public class Member {
     })
     private List<Role> roles;
 
+    @ManyToMany(targetEntity = Region.class)
+    @JoinTable(name = "member_region",
+            joinColumns = {
+                    @JoinColumn(name = "member_id")
+            }, inverseJoinColumns = {
+            @JoinColumn(name = "region_id")
+    })    
+    
+    private List<Region> regions;
+    
     public Long getId() {
         return id;
     }

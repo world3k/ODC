@@ -1,19 +1,19 @@
 package com.world.odc.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.world.odc.common.AjaxResult;
-import com.world.odc.common.Constants;
-import com.world.odc.common.VerifyCodeUtils;
-import com.world.odc.model.dao.MemberDao;
-import com.world.odc.model.dao.ResourceDao;
-import com.world.odc.model.dao.RoleDao;
-import com.world.odc.model.domain.Member;
-import com.world.odc.model.domain.Resource;
-import com.world.odc.model.domain.Role;
-import com.world.odc.model.enums.Gender;
-import com.world.odc.model.enums.ResourceType;
-import com.world.odc.service.AttachmentService;
+import static com.world.odc.common.Constants.SESSION_MEMBER_KEY;
+import static com.world.odc.common.Constants.SESSION_VERIFY_CODE_KEY;
+import static org.apache.commons.lang.StringUtils.isEmpty;
+import static org.apache.commons.lang.StringUtils.isNotEmpty;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
@@ -30,15 +30,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.*;
-
-import static com.world.odc.common.Constants.SESSION_MEMBER_KEY;
-import static com.world.odc.common.Constants.SESSION_VERIFY_CODE_KEY;
-import static org.apache.commons.lang.StringUtils.isEmpty;
-import static org.apache.commons.lang.StringUtils.isNotEmpty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.world.odc.common.AjaxResult;
+import com.world.odc.common.Constants;
+import com.world.odc.common.VerifyCodeUtils;
+import com.world.odc.model.dao.MemberDao;
+import com.world.odc.model.dao.RegionDao;
+import com.world.odc.model.dao.ResourceDao;
+import com.world.odc.model.dao.RoleDao;
+import com.world.odc.model.domain.Member;
+import com.world.odc.model.domain.Region;
+import com.world.odc.model.domain.Resource;
+import com.world.odc.model.domain.Role;
+import com.world.odc.model.enums.Gender;
+import com.world.odc.model.enums.ResourceType;
+import com.world.odc.service.AttachmentService;
 
 /**
  * 系统的入口控制器，入口控制器里面的请求，理论上都受权限控制
@@ -62,6 +69,9 @@ public class AppController {
     @Autowired
     AttachmentService attachmentService;
 
+    @Autowired
+    RegionDao regionDao;
+    
     /**
      * 超级管理员id
      */
@@ -72,7 +82,9 @@ public class AppController {
     public String index() {
         return "index";
     }
-
+    
+    
+    
     @RequestMapping("/login")
     public String login(HttpSession session) {
         if (session.getAttribute(SESSION_MEMBER_KEY) != null) {
@@ -182,11 +194,20 @@ public class AppController {
      *
      * @return
      */
+    
+    
+    @RequestMapping("/regions")
+    @ResponseBody
+    public List<Region> regions() {
+        return regionDao.findAll();
+    }
+    
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public String toReg() {
         return "reg";
     }
-
+    
+    
     @RequestMapping(value = "/reg", method = RequestMethod.POST)
     @Transactional
     public String doReg(String realName, String userName, String password, String code, @SessionAttribute(SESSION_VERIFY_CODE_KEY) String verifyCode, RedirectAttributes attributes) {
