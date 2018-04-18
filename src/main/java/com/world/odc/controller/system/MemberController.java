@@ -33,8 +33,6 @@ import com.world.odc.model.domain.Role;
 
 /**
  * member management controller
- *
- * @author gson
  */
 @Controller
 @RequestMapping("/system/member")

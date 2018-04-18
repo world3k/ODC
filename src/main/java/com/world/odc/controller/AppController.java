@@ -240,7 +240,7 @@ public class AppController {
             member.setHiredate(new Date());
             member.setStatus(true);
             List<Role> roles = new ArrayList<>();
-            roles.add(roleDao.findOne(3l));
+            roles.add(roleDao.findOne(8l));
             member.setRoles(roles);
             memberDao.save(member);
         }

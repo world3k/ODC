@@ -9,9 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 员工
- *
- * @author ____′↘夏悸
+ * customer and employees.
  */
 @Entity
 @Table(name = "crm_member")
@@ -25,7 +23,7 @@ public class Member {
     private String userName;
 
     @Column(length = 128, nullable = false)
-    @JsonIgnore//json序列化的时候，忽略密码字段
+    @JsonIgnore//
     private String password;
 
     @Column(length = 64, nullable = false)
@@ -45,7 +43,7 @@ public class Member {
     private String avatar;
 
     /**
-     * 入职时间
+     * 
      */
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date hiredate;
@@ -70,6 +68,17 @@ public class Member {
     })    
     
     private List<Region> regions;
+    
+    
+    @ManyToMany(targetEntity = Category.class)
+    @JoinTable(name = "member_category",
+            joinColumns = {
+                    @JoinColumn(name = "member_id")
+            }, inverseJoinColumns = {
+            @JoinColumn(name = "category_id")
+    })    
+    
+    private List<Category> categories;
     
     public Long getId() {
         return id;
@@ -147,10 +156,26 @@ public class Member {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRegions(List<Role> roles) {
         this.roles = roles;
     }
 
+    public List<Region> getRegions() {
+        return regions;
+    }
+    
+    public void setCategories(List<Category> categories) {
+        this.categories= categories;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+    
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+    
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }

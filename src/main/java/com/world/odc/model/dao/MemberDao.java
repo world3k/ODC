@@ -12,4 +12,6 @@ public interface MemberDao extends PagingAndSortingRepository<Member, Long>, Jpa
     int countByUserName(String userName);
 
     Member findByUserName(String userName);
+    
+    
 }
