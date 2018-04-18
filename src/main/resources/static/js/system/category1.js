@@ -21,27 +21,6 @@ define(function () {
           width: 50
         },
         {
-          field: 'resType',
-          title: 'category type',
-          width: 40
-        },
-        {
-          field: 'menuUrl',
-          title: 'menu URL',
-          width: 50
-        },
-        {
-          field: 'funUrls',
-          title: 'function URLS',
-          width: 50
-        },
-        {
-          field: 'weight',
-          title: 'weight',
-          align: 'center',
-          width: 30
-        },
-        {
           field: 'status',
           title: 'status',
           width: 30,
