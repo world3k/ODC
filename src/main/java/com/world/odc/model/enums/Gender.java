@@ -1,9 +1,7 @@
 package com.world.odc.model.enums;
 
 /**
- * 性别
- * 
- * @author ____′↘夏悸
+ * gender
  *
  */
 public enum Gender {
