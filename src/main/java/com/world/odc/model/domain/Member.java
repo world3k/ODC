@@ -80,6 +80,17 @@ public class Member {
     
     private List<Category> categories;
     
+
+    @ManyToMany(targetEntity = Region.class)
+    @JoinTable(name = "member_addr",
+            joinColumns = {
+                    @JoinColumn(name = "member_id")
+            }, inverseJoinColumns = {
+            @JoinColumn(name = "addr_id")
+    })  
+    
+    private List<Addr> addrs;
+    
     public Long getId() {
         return id;
     }
@@ -155,7 +166,11 @@ public class Member {
     public List<Role> getRoles() {
         return roles;
     }
-
+    
+    public void setRoles(List<Role> roles) {
+        this.roles= roles;
+    }
+    
     public void setRegions(List<Role> roles) {
         this.roles = roles;
     }
@@ -167,14 +182,20 @@ public class Member {
     public void setCategories(List<Category> categories) {
         this.categories= categories;
     }
-
+   
     public List<Category> getCategories() {
         return categories;
     }
     
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    
+    public List<Addr> getAddrs() {
+        return addrs;
     }
+    
+    public void setAddrs(List<Addr> addrs) {
+        this.addrs= addrs;
+    }
+    
     
     public void setAvatar(String avatar) {
         this.avatar = avatar;
