@@ -36,7 +36,7 @@ public class Region {
 	private String description;
 	
 	@Column(length = 30)
-	private String whname;
+	private String whName;
 
 	@Column(name="whaddress",length = 100)
 	private String whAddress;
@@ -50,11 +50,11 @@ public class Region {
 	}
 
 	public String getWhname() {
-		return whname;
+		return whName;
 	}
 	
 	public void setWhname(String whname) {
-		this.whname = whname;
+		this.whName = whname;
 	}
 
 	public Long getId() {
@@ -91,19 +91,19 @@ public class Region {
 	}
 
 	@Column(length = 100, unique = false, nullable = true)
-	private String whdesc;
+	private String whDesc;
 	
 	
-	public String getWhdesc() {
-		return whdesc;
+	public String getWhDesc() {
+		return whDesc;
 	}
 
-	public void setWhdesc(String whdesc) {
-		this.whdesc = whdesc;
+	public void setWhDesc(String whDesc) {
+		this.whDesc = whDesc;
 	}
 
 	@Override
 	public String toString() {
-		return "Region [id=" + id + ", name=" + name + ", description=" + description +" ,whname="+whname+" ,whdesc="+whdesc+ "]";
+		return "Region [id=" + id + ", name=" + name + ", description=" + description +" ,whname="+whName+" ,whDesc="+whDesc+ "]";
 	}
 }
