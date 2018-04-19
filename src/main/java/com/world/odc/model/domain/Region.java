@@ -20,7 +20,7 @@ public class Region {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToMany(targetEntity=Resource.class)
+	@ManyToMany(targetEntity=Member.class)
 	@JoinTable(name="member_region",
 	joinColumns={
 			@JoinColumn(name="region_id")
@@ -38,6 +38,14 @@ public class Region {
 	@Column(length = 30)
 	private String whName;
 
+	public String getWhName() {
+		return whName;
+	}
+
+	public void setWhName(String whName) {
+		this.whName = whName;
+	}
+
 	@Column(name="whaddress",length = 100)
 	private String whAddress;
 	
@@ -49,13 +57,6 @@ public class Region {
 		this.whAddress = whAddress;
 	}
 
-	public String getWhname() {
-		return whName;
-	}
-	
-	public void setWhname(String whname) {
-		this.whName = whname;
-	}
 
 	public Long getId() {
 		return id;
@@ -104,6 +105,6 @@ public class Region {
 
 	@Override
 	public String toString() {
-		return "Region [id=" + id + ", name=" + name + ", description=" + description +" ,whname="+whName+" ,whDesc="+whDesc+ "]";
+		return "Region [id=" + id + ", name=" + name + ", description=" + description +" ,whName="+whName+" ,whDesc="+whDesc+ "]";
 	}
 }
