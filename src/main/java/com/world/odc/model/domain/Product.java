@@ -20,6 +20,17 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	private float quantity;
+	
+	public float getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(float quantity) {
+		this.quantity = quantity;
+	}
+
+
 	@ManyToMany(targetEntity=Member.class)
 	@JoinTable(name="member_product",
 	joinColumns={
@@ -29,7 +40,7 @@ public class Product {
 	})
     private List<Member> members;
 	
-	@Column(length = 30, unique = true, nullable = false)
+	@Column(name="prod_name",length = 30, unique = true, nullable = false)
 	private String prodName;
 
 	@Column(length = 512)
@@ -41,10 +52,32 @@ public class Product {
 	@Column(length = 30, unique = true, nullable = false)
 	private Float weight;
 	
+	 @Column(length = 256)
+	    private String avatar;
+
+	 @ManyToMany(targetEntity=Category.class)
+		@JoinTable(name="product_category",
+		joinColumns={
+				@JoinColumn(name="prod_id")
+		},inverseJoinColumns={
+				@JoinColumn(name="category_id")
+		})
+	   
+	 private List<Category> Categories;
+	 	 
+	
+	public List<Category> getCategories() {
+		return Categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		Categories = categories;
+	}
+
 	public List<Member> getMembers() {
 		return members;
 	}
-
+   
 	public void setMembers(List<Member> members) {
 		this.members = members;
 	}
@@ -65,6 +98,7 @@ public class Product {
 		this.weight = weight;
 	}
 
+	
 	private Boolean status = true;
 
 	public Long getId() {
@@ -100,7 +134,13 @@ public class Product {
 	}
 	
 	
-	
+	public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
 
 
 	@Override

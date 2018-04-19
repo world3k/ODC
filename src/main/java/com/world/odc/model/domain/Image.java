@@ -19,8 +19,8 @@ import java.util.Date;
  * <p>****************************************************************************</p>
  */
 @Entity
-@Table(name = "crm_attachment")
-public class Attachment {
+@Table(name = "image")
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,7 +34,7 @@ public class Attachment {
      */
     @ManyToOne
     @JsonIgnore
-    private Member member;
+    private Product product;
 
     /**
      * 文件原始名称
@@ -90,12 +90,12 @@ public class Attachment {
         this.type = type;
     }
 
-    public Member getMember() {
-        return member;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getOriginalName() {
@@ -156,10 +156,10 @@ public class Attachment {
 
     @Override
     public String toString() {
-        return "Attachment{" +
+        return "Image{" +
                 "id=" + id +
                 ", type=" + type +
-                ", member=" + member.getRealName() +
+                ", product=" + product.getProdName() +
                 ", originalName='" + originalName + '\'' +
                 ", filePath='" + filePath + '\'' +
                 ", fileSize=" + fileSize +
