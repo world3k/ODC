@@ -32,8 +32,30 @@ public class Region {
 	@Column(length = 30, unique = true, nullable = false)
 	private String name;
 
-	@Column(length = 512)
+	@Column(length = 100)
 	private String description;
+	
+	@Column(length = 30)
+	private String whname;
+
+	@Column(name="whaddress",length = 100)
+	private String whAddress;
+	
+	public String getWhAddress() {
+		return whAddress;
+	}
+
+	public void setWhAddress(String whAddress) {
+		this.whAddress = whAddress;
+	}
+
+	public String getWhname() {
+		return whname;
+	}
+	
+	public void setWhname(String whname) {
+		this.whname = whname;
+	}
 
 	public Long getId() {
 		return id;
@@ -60,16 +82,28 @@ public class Region {
 	}
 
 	
-	public List<Member> getMember() {
+	public List<Member> getMembers() {
 		return members;
 	}
 	
-	public void setMember(List<Member> members) {
+	public void setMembers(List<Member> members) {
 		this.members = members;
+	}
+
+	@Column(length = 100, unique = false, nullable = true)
+	private String whdesc;
+	
+	
+	public String getWhdesc() {
+		return whdesc;
+	}
+
+	public void setWhdesc(String whdesc) {
+		this.whdesc = whdesc;
 	}
 
 	@Override
 	public String toString() {
-		return "Region [id=" + id + ", name=" + name + ", description=" + description + "]";
+		return "Region [id=" + id + ", name=" + name + ", description=" + description +" ,whname="+whname+" ,whdesc="+whdesc+ "]";
 	}
 }
