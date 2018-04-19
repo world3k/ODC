@@ -46,6 +46,7 @@ import com.world.odc.model.domain.Role;
 import com.world.odc.model.enums.Gender;
 import com.world.odc.model.enums.ResourceType;
 import com.world.odc.service.AttachmentService;
+import com.world.odc.common.Util;
 
 /**
  * 系统的入口控制器，入口控制器里面的请求，理论上都受权限控制
@@ -199,7 +200,7 @@ public class AppController {
     @RequestMapping("/regions")
     @ResponseBody
     public List<Region> regions() {
-        return regionDao.findAll();
+        return Util.toList(regionDao.findAll( ) );
     }
     
     @RequestMapping(value = "/reg", method = RequestMethod.GET)

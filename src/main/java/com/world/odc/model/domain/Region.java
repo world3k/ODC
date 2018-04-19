@@ -2,6 +2,7 @@ package com.world.odc.model.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "region")
 public class Region {
@@ -20,14 +23,16 @@ public class Region {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToMany(targetEntity=Member.class)
-	@JoinTable(name="member_region",
-	joinColumns={
-			@JoinColumn(name="region_id")
-	},inverseJoinColumns={
-			@JoinColumn(name="member_id")
-	})
-    private List<Member> members;
+	/*
+	@ManyToMany(mappedBy = "regions") 
+	
+	*/
+	@ManyToMany(cascade={CascadeType.PERSIST})    
+    @JoinTable(name="member_region",    
+    joinColumns={@JoinColumn(name="region_id",referencedColumnName="id")    },    inverseJoinColumns={         @JoinColumn(name="member_id",referencedColumnName="id")    })     
+   
+	@JsonIgnoreProperties("regions")
+	protected List<Member> members;
 	
 	@Column(length = 30, unique = true, nullable = false)
 	private String name;
@@ -82,14 +87,6 @@ public class Region {
 		this.description = description;
 	}
 
-	
-	public List<Member> getMembers() {
-		return members;
-	}
-	
-	public void setMembers(List<Member> members) {
-		this.members = members;
-	}
 
 	@Column(length = 100, unique = false, nullable = true)
 	private String whDesc;
@@ -101,6 +98,15 @@ public class Region {
 
 	public void setWhDesc(String whDesc) {
 		this.whDesc = whDesc;
+	}
+
+	
+	public List<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
 	}
 
 	@Override

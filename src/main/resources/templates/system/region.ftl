@@ -1,9 +1,11 @@
 <div class="easyui-layout" fit="true">
   <div data-options="region:'north',border:false" style="height: 80px;padding: 10px;overflow: hidden;" title="User Management">
     <form id="region_search_from" class="searcher-form">
-      <input name="userName" class="easyui-textbox field" label="username：" labelWidth="45">
-      <input name="realName" class="easyui-textbox field" label="name：" labelWidth="45">
-      <input name="telephone" class="easyui-textbox field" label="phone：" labelWidth="45">
+      <input name="name" class="easyui-textbox field" label="nname：" labelWidth="45">
+      <input name="description" class="easyui-textbox field" label="description：" labelWidth="45">
+      <input name="whName" class="easyui-textbox field" label="Warehouse name：" labelWidth="45">
+      <input name="whAddress" class="easyui-textbox field" label="Warehouse address：" labelWidth="45">
+      <input name="whDesc" class="easyui-textbox field" label="Warehouse description：" labelWidth="45">
       <a class="easyui-linkbutton searcher" data-options="iconCls:'fa fa-search'">search</a>
       <a class="easyui-linkbutton reset" data-options="iconCls:'fa fa-repeat'">reset</a>
     </form>

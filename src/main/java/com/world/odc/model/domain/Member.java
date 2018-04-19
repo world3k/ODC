@@ -1,12 +1,25 @@
 package com.world.odc.model.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.world.odc.model.enums.Gender;
-
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.world.odc.model.enums.Gender;
 
 /**
  * customer and employees.
@@ -18,7 +31,11 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+ 
+    @ManyToMany(mappedBy = "members")
+	@JsonIgnoreProperties("members")
+	protected List<Region> regions;
+    
     @Column(length = 64, nullable = false, unique = true, updatable = false)
     private String userName;
 
@@ -49,8 +66,9 @@ public class Member {
     private Date hiredate;
 
     private Boolean status = false;
-
-    @ManyToMany(targetEntity = Role.class)
+  
+    
+  	@ManyToMany(targetEntity = Role.class)
     @JoinTable(name = "crm_member_role",
             joinColumns = {
                     @JoinColumn(name = "member_id")
@@ -58,17 +76,7 @@ public class Member {
             @JoinColumn(name = "role_id")
     })
     private List<Role> roles;
-
-    @ManyToMany(targetEntity = Region.class)
-    @JoinTable(name = "member_region",
-            joinColumns = {
-                    @JoinColumn(name = "member_id")
-            }, inverseJoinColumns = {
-            @JoinColumn(name = "region_id")
-    })    
-    
-    private List<Region> regions;
-    
+   
     
     @ManyToMany(targetEntity = Category.class)
     @JoinTable(name = "member_category",
@@ -81,7 +89,7 @@ public class Member {
     private List<Category> categories;
     
 
-    @ManyToMany(targetEntity = Region.class)
+    @ManyToMany(targetEntity = Addr.class)
     @JoinTable(name = "member_addr",
             joinColumns = {
                     @JoinColumn(name = "member_id")
@@ -171,13 +179,7 @@ public class Member {
         this.roles= roles;
     }
     
-    public void setRegions(List<Role> roles) {
-        this.roles = roles;
-    }
 
-    public List<Region> getRegions() {
-        return regions;
-    }
     
     public void setCategories(List<Category> categories) {
         this.categories= categories;
@@ -204,8 +206,18 @@ public class Member {
     public String getAvatar() {
         return avatar;
     }
+    
+    
 
-    @Override
+    public List<Region> getRegions() {
+		return regions;
+	}
+
+	public void setRegions(List<Region> regions) {
+		this.regions = regions;
+	}
+
+	@Override
     public String toString() {
         return "Member [id=" + id + ", userName=" + userName + ", password=" + password + ", realName=" + realName
                 + ", gender=" + gender + ", telephone=" + telephone + ", email=" + email + ", hiredate=" + hiredate

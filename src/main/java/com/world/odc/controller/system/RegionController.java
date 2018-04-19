@@ -60,7 +60,7 @@ public class RegionController {
     public void index() {
 
     }
-
+    
     @RequestMapping("/list")
     @ResponseBody
     public DataGrid<Region> list() {
