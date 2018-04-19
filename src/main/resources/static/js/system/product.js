@@ -101,7 +101,7 @@ define(function () {
                     $(this).dialog("destroy");
                 },
                 onLoad: function () {
-
+                    form = $("#product-form");
                 },
                 buttons: [{
                     iconCls: 'fa fa-save',

@@ -21,10 +21,10 @@ define(function () {
                 [
                     [
                         {field: 'name', title: 'name', width: 30},
-                        {field: 'description', title: 'description', width: 20},
                         {field: 'whaddress', title: 'whaddress', width: 30},
-                        {field: 'whdesc', title: '电话', width: 50},
-                        {field: 'whname', title: 'email', width: 50},
+                        {field: 'whdesc', title: 'whdesc', width: 50},
+                        {field: 'whname', title: 'whname', width: 50},
+                        {field: 'description', title: 'description', width: 20},
                         {
                             field: 'test',
                             title: 'do',
@@ -99,18 +99,19 @@ define(function () {
                     $(this).dialog("destroy");
                 },
                 onLoad: function () {
-
+                    //
+                    form = $("#member-form");
                 },
                 buttons: [{
                     iconCls: 'fa fa-save',
                     text: 'save',
                     handler: function () {
-                        if (form.form('validate')) {
-                            $.post("/system/region/save", form.serialize(), function (res) {
-                                dg.datagrid('reload');
-                                dialog.dialog('close');
-                            })
-                        }
+
+                        $.post("/system/region/save", form.serialize(), function (res) {
+                            dg.datagrid('reload');
+                            dialog.dialog('close');
+                        })
+
                     }
                 }]
             });
